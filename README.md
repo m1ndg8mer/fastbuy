@@ -1,3 +1,3 @@
 # README
 
-Forum on [production](https://fastbuy.herokuapp.com/)
+Internet-store 'FastBuy' on [production](https://fastbuy.herokuapp.com/)
