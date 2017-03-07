@@ -6,38 +6,26 @@ nav.navbar.navbar-default.navbar-fixed-top
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      a.navbar-brand href="#"  Project name
+      a.navbar-brand.glyphicon.glyphicon-blackboard href=root_path  FastBuy
     #navbar.navbar-collapse.collapse
       ul.nav.navbar-nav
         li.active
-          a href="#"  Home
-        li
-          a href="#about"  About
-        li
-          a href="#contact"  Contact
-        li.dropdown
-          a.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
-            | Dropdown
-            span.caret
-          ul.dropdown-menu
-            li
-              a href="#"  Action
-            li
-              a href="#"  Another action
-            li
-              a href="#"  Something else here
-            li.divider role="separator"
-            li.dropdown-header Nav header
-            li
-              a href="#"  Separated link
-            li
-              a href="#"  One more separated link
+          = link_to " Home", root_path, class: 'glyphicon glyphicon-home'
+
       ul.nav.navbar-nav.navbar-right
-        li
-          a href="../navbar/"  Default
-        li
-          a href="../navbar-static-top/"  Static top
-        li.active
-          a href="./"
-            | Fixed top
-            span.sr-only (current)
+        - unless user_signed_in?
+          li
+            = link_to " Sign-Up", new_user_registration_path, class: 'glyphicon glyphicon-user'
+          li
+            = link_to " Login", new_user_session_path, class: 'glyphicon glyphicon-log-in'
+        - else
+          li.dropdown
+            a.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
+              | User
+              span.caret
+            ul.dropdown-menu
+              li
+                = link_to " Profile", edit_user_registration_path, class: 'glyphicon glyphicon-user'
+              li.divider role="separator"
+              li
+                = link_to " Logout", destroy_user_session_path, method: :delete, class: 'glyphicon glyphicon-log-out'
