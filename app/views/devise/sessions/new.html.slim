@@ -1,18 +1,42 @@
-- provide(:title, 'Log in')
-h2
-  | Log in
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .field.form-group
-    = f.label :email
-    = f.email_field :email, autofocus: true, class: 'form-control'
-  .field.form-group
-    = f.label :password
-    = f.password_field :password, autocomplete: "off", class: 'form-control'
-  - if devise_mapping.rememberable?
-    .field.form-group
-      = f.check_box :remember_me
-      p
-        = f.label :remember_me
-  .actions.form-group
-    = f.submit "Log in", class: 'btn btn-primary'
-= render "devise/shared/links"
+- provide(:title, 'Login')
+
+/! Breadcrumb Starts
+  ol.breadcrumb
+    li
+      a href="index.html"  Home
+    li.active Register
+  /! Breadcrumb Ends
+/! Main Heading Starts
+h2.main-heading.text-center
+  | Login or create new account
+/! Main Heading Ends
+/! Login Form Section Starts
+section.login-area
+  .row
+    .col-sm-6
+      /! Login Panel Starts
+      .panel.panel-smart
+        .panel-heading
+          h3.panel-title Login
+        .panel-body
+          p
+            | Please login using your existing account
+          /! Login Form Starts
+          = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+            .form-group
+              = f.email_field :email, placeholder: 'Email', autofocus: true, class: 'form-control'
+            .form-group
+              = f.password_field :password, placeholder: 'Password', autocomplete: "off", class: 'form-control'
+            = f.submit "Login", class: 'btn btn-black'
+    /! Login Form Ends
+    /! Login Panel Ends
+    .col-sm-6
+      /! Account Panel Starts
+      .panel.panel-smart
+        .panel-heading
+          h3.panel-title
+            | Create new account
+        .panel-body
+          p
+            | Registration allows you to avoid filling in billing and shipping forms every time you checkout on this website
+          = link_to 'Register', new_user_registration_path, class: 'btn btn-black'

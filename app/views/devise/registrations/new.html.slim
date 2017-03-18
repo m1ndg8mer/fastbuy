@@ -1,24 +1,85 @@
 - provide(:title, 'Sign up')
-h2
-  | Sign up
-= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  - if resource.errors.any?
-    .alert.alert-danger
-      = devise_error_messages!
-  .field.form-group
-    = f.label :email
-    = f.email_field :email, autofocus: true, class: 'form-control'
-  .field.form-group
-    = f.label :password
-    - if @minimum_password_length
-      em
-        | (
-        = @minimum_password_length
-        |  characters minimum)
-    = f.password_field :password, autocomplete: "off", class: 'form-control'
-  .field.form-group
-    = f.label :password_confirmation
-    = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'
-  .actions.form-group
-    = f.submit "Sign up", class: 'btn btn-primary'
-= render "devise/shared/links"
+
+/ol.breadcrumb
+  li
+    a href="index.html"  Home
+  li.active Register
+/! Breadcrumb Ends
+/! Main Heading Starts
+h2.main-heading.text-center
+  | Register
+  br
+  span Create New Account
+/! Main Heading Ends
+/! Registration Section Starts
+section.registration-area
+  .row
+    .col-sm-6
+      /! Registration Block Starts
+      .panel.panel-smart
+        .panel-heading
+          h3.panel-title Personal Information
+        .panel-body
+          /! Registration Form Starts
+          = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+            - if resource.errors.any?
+              .alert.alert-danger
+                = devise_error_messages!
+            /! Personal Information Starts
+            .form-group
+              label.col-sm-3.control-label for="inputEmail"  Email :
+              .col-sm-9
+                = f.email_field :email, placeholder: 'Email', autofocus: true, class: 'form-control', id: 'inputEmail'
+            /! Personal Information Ends
+            br
+            h3.panel-heading.inner
+              | Password
+            /! Password Area Starts
+            .form-group
+              label.col-sm-3.control-label for="inputPassword"  Password :
+              .col-sm-9
+                = f.password_field :password, placeholder: 'Password', autocomplete: "off", class: 'form-control', id: 'inputPassword'
+            br
+            br
+            .form-group
+              label.col-sm-3.control-label for="inputRePassword"  Re-Password :
+              .col-sm-9
+                = f.password_field :password_confirmation, placeholder: 'Re-Password', autocomplete: "off", class: 'form-control', id: 'inputRePassword'
+            .form-group
+              .col-sm-offset-3.col-sm-9
+                .checkbox
+                  label
+                    = f.check_box :terms_and_conditions
+                    | I'v read and agreed on Conditions
+            .form-group
+              .col-sm-offset-3.col-sm-9
+                = f.submit "Register", class: 'btn btn-black'
+    /! Password Area Ends
+    /! Registration Form Starts
+    /! Registration Block Ends
+    .col-sm-6
+      .panel.panel-smart
+        .panel-heading
+          h3.panel-title
+            | Conditions
+        .panel-body
+          p
+            | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including  versions of Lorem Ipsum.
+          ol
+            li Lorem ipsum dolor sit amet
+            li Consectetur adipiscing elit
+            li Integer molestie lorem at massa
+            li Facilisis in pretium nisl aliquet
+            li Nulla volutpat aliquam velit
+            li Faucibus porta lacus fringilla vel
+            li Aenean sit amet erat nunc
+            li Eget porttitor lorem
+          p
+            | HTML Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris.
+          p
+            | Integer in mauris eu nibh euismod gravida. Duis ac tellus et risus vulputate vehicula. Donec lobortis risus a elit. Etiam tempor. Ut ullamcorper, ligula eu tempor congue, eros est euismod turpis, id tincidunt sapien risus a quam. Maecenas fermentum consequat mi. Donec fermentum. Pellentesque malesuada nulla a mi. Duis sapien sem, aliquet nec, commodo eget, consequat quis, neque.
+          p
+            | Aliquam faucibus, elit ut dictum aliquet, felis nisl adipiscing sapien, sed malesuada diam lacus eget erat. Cras mollis scelerisque nunc. Nullam arcu. Aliquam consequat. Curabitur augue lorem, dapibus quis, laoreet et, pretium ac, nisi.
+          p
+            | Aenean magna nisl, mollis quis, molestie eu, feugiat in, orci. In hac habitasse platea dictumst.
+/! Conditions Panel Ends

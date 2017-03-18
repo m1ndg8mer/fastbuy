@@ -8,14 +8,15 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track' => 'reload'
     = csrf_meta_tags
 
+    link href="//fonts.googleapis.com/css?family=Roboto+Condensed:300italic,400italic,700italic,400,300,700" rel="stylesheet" type="text/css" /
+    link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,700,300,600,800,400" rel="stylesheet" type="text/css" /
+
   body
     = render 'layouts/shared/header'
-    .container
-      - if notice
-        .alert.alert-info
-          = notice
-      - if alert
-        .alert.alert-warning
-          = alert
-      = yield
-      = render 'layouts/shared/footer'
+    #main-container.container.home
+      .row
+        = render 'layouts/shared/messages'
+        - if current_page? root_path
+          = render 'layouts/shared/design/sidebar'
+        = yield
+    = render 'layouts/shared/footer'

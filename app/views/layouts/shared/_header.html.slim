@@ -1,31 +1,137 @@
-nav.navbar.navbar-default.navbar-fixed-top
+/! Header Section Starts
+header#header-area
+  /! Nested Container Starts
   .container
-    .navbar-header
-      button.navbar-toggle.collapsed aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" type="button"
-        span.sr-only Toggle navigation
-        span.icon-bar
-        span.icon-bar
-        span.icon-bar
-      a.navbar-brand.glyphicon.glyphicon-blackboard href=root_path  FastBuy
-    #navbar.navbar-collapse.collapse
-      ul.nav.navbar-nav
-        li.active
-          = link_to " Home", root_path, class: 'glyphicon glyphicon-home'
-
-      ul.nav.navbar-nav.navbar-right
-        - unless user_signed_in?
-          li
-            = link_to " Sign-Up", new_user_registration_path, class: 'glyphicon glyphicon-user'
-          li
-            = link_to " Login", new_user_session_path, class: 'glyphicon glyphicon-log-in'
-        - else
-          li.dropdown
-            a.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
-              | User
-              span.caret
-            ul.dropdown-menu
+    /! Header Top Starts
+    .header-top.text-uppercase
+      .row
+        /! Header Links Starts
+        .col-sm-5.col-xs-12
+          .header-links
+            ul.nav.navbar-nav
               li
-                = link_to " Profile", edit_user_registration_path, class: 'glyphicon glyphicon-user'
-              li.divider role="separator"
+                = link_to root_path do
+                  i.fa.fa-home.hidden-lg.hidden-md title="Home"
+                  span.hidden-sm.hidden-xs
+                    | Home
+              - unless user_signed_in?
+                li
+                  = link_to new_user_session_path do
+                    i.fa.fa-lock.hidden-lg.hidden-md title="Login"
+                    span.hidden-sm.hidden-xs
+                      | Login
+                li
+                  = link_to new_user_registration_path do
+                    i.fa.fa-unlock.hidden-lg.hidden-md title="Register"
+                    span.hidden-sm.hidden-xs
+                      | Register
+              - else
+                li
+                  = link_to edit_user_registration_path do
+                    i.fa.fa-user.hidden-lg.hidden-md title=("My Account")
+                    span.hidden-sm.hidden-xs
+                      | My Account
+                li
+                  = link_to destroy_user_session_path, method: :delete do
+                    i.fa.fa-lock.hidden-lg.hidden-md title="Login"
+                    span.hidden-sm.hidden-xs
+                      | Logout
+        /! Header Links Ends
+        .col-sm-3.col-xs-12.hidden-md.hidden-sm.hidden-xs.text-center.msg
+          span Welcome to our online store!
+        /! Currency &amp; Languages Starts
+        .col-lg-4.col-sm-7.col-xs-12.text-right
+          /! Languages Starts
+          .btn-group
+            button.btn.btn-link.dropdown-toggle.text-uppercase data-toggle="dropdown"
+              | Language:
+              span English
+              i.fa.fa-caret-down
+            ul.pull-right.dropdown-menu
               li
-                = link_to " Logout", destroy_user_session_path, method: :delete, class: 'glyphicon glyphicon-log-out'
+                a href="#" tabindex="-1"  English
+              li
+                a href="#" tabindex="-1"  Ukrainian
+    /! Languages Ends
+    /! Main Header Starts
+    .main-header
+      .row
+        /! Logo Starts
+        .col-md-6.col-xs-12
+          #logo
+            = link_to root_path
+              = image_tag 'logo.png', alt: 'Mobile Shoppe', title: 'Mobile Shoppe', style: 'img-responsive'
+        /! Logo Starts
+        /! Search Starts
+        .col-md-3.col-xs-12
+          #search
+            .input-group
+              input.form-control.input-lg placeholder="Search" type="text" /
+              span.input-group-btn
+                button.btn.btn-lg type="button"
+                  i.fa.fa-search
+        /! Search Ends
+        /! Shopping Cart Starts
+        .col-md-3.col-xs-12
+          #cart.btn-group.btn-block
+            button.btn.btn-block.btn-lg.dropdown-toggle data-toggle="dropdown" type="button"
+              i.fa.fa-shopping-cart
+              span.hidden-md Cart:
+              span#cart-total 2 item(s) - $340.00
+              i.fa.fa-angle-down
+            ul.dropdown-menu.pull-right
+              li
+                table.table.hcart
+                  tr
+                    td.text-center
+                      a href="product.html"
+                        = image_tag 'hcart-thumb1.jpg', alt: 'image', title: 'image', style: 'img-thumbnail img-responsive'
+                    td.text-left
+                      a href="product-full.html"
+                        | Seeds
+                    td.text-right x 1
+                    td.text-right $120.68
+                    td.text-center
+                      a href="#"
+                        i.fa.fa-times
+                  tr
+                    td.text-center
+                      a href="product.html"
+                        = image_tag 'hcart-thumb2.jpg', alt: 'image', title: 'image', style: 'img-thumbnail img-responsive'
+                    td.text-left
+                      a href="product-full.html"
+                        | Organic
+                    td.text-right x 2
+                    td.text-right $240.00
+                    td.text-center
+                      a href="#"
+                        i.fa.fa-times
+              li
+                table.table.table-bordered.total
+                  tbody
+                    tr
+                      td.text-right
+                        strong Sub-Total
+                      td.text-left $1,101.00
+                    tr
+                      td.text-right
+                        strong Eco Tax (-2.00)
+                      td.text-left $4.00
+                    tr
+                      td.text-right
+                        strong VAT (17.5%)
+                      td.text-left $192.68
+                    tr
+                      td.text-right
+                        strong Total
+                      td.text-left $1,297.68
+                p.text-right.btn-block1
+                  a href="cart.html"
+                    | View Cart
+                  a href="#"
+                    | Checkout
+/! Shopping Cart Ends
+/! Main Header Ends
+/! Nested Container Ends
+/! Header Section Ends
+= render 'layouts/shared/design/nav'

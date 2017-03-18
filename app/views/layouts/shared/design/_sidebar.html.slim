@@ -1,0 +1,72 @@
+.col-md-3
+  /! Categories Links Starts
+  h3.side-heading Categories
+  .list-group.categories
+    a.list-group-item href="category-grid.html"
+      i.fa.fa-chevron-right
+      | Digital Cameras
+    a.list-group-item href="category-grid.html"
+      i.fa.fa-chevron-right
+      | Sound Devices
+    a.list-group-item href="category-grid.html"
+      i.fa.fa-chevron-right
+      | Televisions
+    a.list-group-item href="category-grid.html"
+      i.fa.fa-chevron-right
+      | Computers
+    a.list-group-item href="category-grid.html"
+      i.fa.fa-chevron-right
+      | Washing Machines
+    a.list-group-item href="category-grid.html"
+      i.fa.fa-chevron-right
+      | Accessories
+    a.list-group-item href="category-grid.html"
+      i.fa.fa-chevron-right
+      | Mobile Phones
+  /! Categories Links Ends
+  /! Banner #1 Starts
+  a href="#"
+    = image_tag 'side-banner1.jpg', alt: 'Side Banner', style: 'img-responsive img-center-sm img-center-xs'
+  br
+  br
+  /! Banner #1 Ends
+  /! Shopping Options Starts
+  h3.side-heading Shopping Options
+  .list-group
+    .list-group-item
+      | Brands
+    .list-group-item
+      .filter-group
+        label.checkbox
+          input checked="checked" name="filter1" type="checkbox" value="br1" /
+          | Brand Name 1
+        label.checkbox
+          input name="filter2" type="checkbox" value="br2" /
+          | Brand Name 2
+        label.checkbox
+          input name="filter3" type="checkbox" value="br3" /
+          | Brand Name 3
+        label.checkbox
+          input name="filter4" type="checkbox" value="br4" /
+          | Brand Name 4
+    .list-group-item
+      | Manufacturer
+    .list-group-item
+      .filter-group
+        label.radio
+          input checked="checked" name="filter-manuf" type="radio" value="mr1" /
+          | Manufacturer Name 1
+        label.radio
+          input name="filter-manuf" type="radio" value="mr2" /
+          | Manufacturer Name 2
+        label.radio
+          input name="filter-manuf" type="radio" value="mr3" /
+          | Manufacturer Name 3
+    .list-group-item
+      button.btn.btn-black type="button"  Filter
+  /! Shopping Options Ends
+  /! Banner #2 Starts
+  = image_tag 'side-banner2.jpg', alt: 'Side Banner', style: 'img-responsive img-center-sm img-center-xs'
+  br
+/! Banner #2 Ends
+/! Sidebar Ends
