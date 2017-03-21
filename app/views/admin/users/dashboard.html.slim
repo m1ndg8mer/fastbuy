@@ -1,0 +1,20 @@
+- provide(:title, 'Admin Dashboard')
+.container.content-area
+  = render 'layouts/shared/messages'
+  .row
+    .col-lg-12
+      .page-header
+        h2.center Welcome Admin!
+  .row
+    = render 'layouts/shared/panel', title: panel_title(@total_categories, 'Categories'),
+            link_to_index: categories_path,
+            glyphicon: 'glyphicon-th-list'
+
+    = render 'layouts/shared/panel',  title: panel_title(@total_users, 'Users'),
+            link_to_index: admin_users_path,
+            glyphicon: 'glyphicon-user'
+
+    = render 'layouts/shared/panel',  title: panel_title(@total_products, 'Products'),
+            link_to_index: products_path,
+            glyphicon: 'glyphicon-apple'
+br

@@ -5,4 +5,9 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:terms_and_conditions])
   end
+
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_path, :alert => 'Access Denied!'
+  end
+
 end

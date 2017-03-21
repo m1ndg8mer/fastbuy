@@ -1,0 +1,21 @@
+- provide(:title, 'Edit Category')
+h1 Edit Category
+= form_for @category do |f|
+  - if @category.errors.any?
+    .alert.alert-danger
+      - @category.errors.full_messages.each do |message|
+        = message
+        br
+  p
+    = f.label :title
+    = f.text_field :title, value: @category.title, class: 'form-control'
+  p
+    = f.label :parent_id
+    br
+    = f.select(:parent_id) do
+      - @parents.each do |c|
+        - if @category.parent_id == c.id
+          - selected = 'selected'
+        = content_tag(:option, c.title, value: c.id, selected: selected)
+  = f.submit 'Update', class: 'btn btn-primary'
+br

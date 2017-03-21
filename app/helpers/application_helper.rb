@@ -5,7 +5,12 @@ module ApplicationHelper
     if page_title.empty?
       base_title
     else
-      base_title + ' | ' + page_title
+      page_title + ' | ' + base_title
     end
+  end
+
+  # Returns the panel title
+  def panel_title(count, title)
+    content_tag(:h2, count) + content_tag(:h4, title)
   end
 end

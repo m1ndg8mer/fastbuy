@@ -33,9 +33,15 @@ header#header-area
                       | My Account
                 li
                   = link_to destroy_user_session_path, method: :delete do
-                    i.fa.fa-lock.hidden-lg.hidden-md title="Login"
+                    i.fa.fa-lock.hidden-lg.hidden-md title="Logout"
                     span.hidden-sm.hidden-xs
                       | Logout
+                - if current_user.has_role? :admin
+                  li
+                    = link_to dashboard_admin_users_path do
+                      i.fa.fa-lock.hidden-lg.hidden-md title="Admin Panel"
+                      span.hidden-sm.hidden-xs
+                        | Admin Panel
         /! Header Links Ends
         .col-sm-3.col-xs-12.hidden-md.hidden-sm.hidden-xs.text-center.msg
           span Welcome to our online store!
