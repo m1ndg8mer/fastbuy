@@ -17,8 +17,12 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new(category_params)
 
+    if params[:parent]
+      @category.parent_id = nil
+    end
+
     if @category.save
-      redirect_to categories_path, :notice => 'Success!'
+      redirect_to manage_categories_admin_users_path, :notice => 'Success!'
     else
       render :new
     end
@@ -26,7 +30,8 @@ class CategoriesController < ApplicationController
 
   def update
     if @category.update_attributes(category_params)
-      redirect_to @category, :notice => 'Success!'
+
+      redirect_to edit_category_path(@category), :notice => 'Success!'
     else
       render :edit
     end
@@ -36,16 +41,15 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    @category.products.each(&:destroy!)
     @category.destroy
 
-    redirect_to categories_path, :notice => 'Success!'
+    redirect_to manage_categories_admin_users_path, :notice => 'Success!'
   end
 
   private
 
   def category_params
-    params.require(:category).permit(:title, :parent_id)
+    params.require(:category).permit(:title, :parent_id, :parent)
   end
 
   def initialize_category

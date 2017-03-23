@@ -7,7 +7,7 @@
         h2.center Welcome Admin!
   .row
     = render 'layouts/shared/panel', title: panel_title(@total_categories, 'Categories'),
-            link_to_index: categories_path,
+            link_to_index: manage_categories_admin_users_path,
             glyphicon: 'glyphicon-th-list'
 
     = render 'layouts/shared/panel',  title: panel_title(@total_users, 'Users'),
@@ -15,6 +15,6 @@
             glyphicon: 'glyphicon-user'
 
     = render 'layouts/shared/panel',  title: panel_title(@total_products, 'Products'),
-            link_to_index: products_path,
+            link_to_index: manage_products_admin_users_path,
             glyphicon: 'glyphicon-apple'
 br

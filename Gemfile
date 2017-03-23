@@ -16,6 +16,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise'
 gem 'cancancan'
 gem 'rolify'
+gem 'paperclip'
+gem 'aws-sdk', '~> 2'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 

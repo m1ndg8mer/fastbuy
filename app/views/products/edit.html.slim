@@ -1,0 +1,41 @@
+- provide(:title, 'Edit Category')
+
+ol.breadcrumb
+  li
+    = link_to 'Products', manage_products_admin_users_path
+  li.active Edit
+
+h1 Edit Product
+= form_for @product do |f|
+  - if @product.errors.any?
+    .alert.alert-danger
+      - @product.errors.full_messages.each do |message|
+        = message
+        br
+  p
+    = image_tag @product.img.url(:medium)
+    = f.file_field :img, class: 'form-control'
+  p
+    = f.label :title
+    = f.text_field :title, value: @product.title, class: 'form-control'
+  p
+    = f.label :qty
+    = f.text_field :qty, value: @product.qty, class: 'form-control'
+  p
+    = f.label :price
+    = f.text_field :price, value: @product.price, class: 'form-control'
+  p
+    = f.label :description, 'Description'
+    = f.text_area :description, value: @product.description, class: 'form-control', rows: 10
+  p
+    br
+    = f.label :category_id
+    span.margin
+      = f.select(:category_id) do
+        - if @categories
+          - @categories.each do |c|
+            - if @product.category_id == c.id
+              - selected = 'selected'
+            = content_tag(:option, c.title, value: c.id, selected: selected)
+  = f.submit 'Update', class: 'btn btn-primary'
+br

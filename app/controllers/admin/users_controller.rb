@@ -3,7 +3,15 @@ module Admin
     load_and_authorize_resource
 
     def index
-      @users = User.paginate(:page => params[:page], :per_page => 5)
+      @users = User.paginate(:page => params[:page], :per_page => 10)
+    end
+
+    def manage_categories
+      @categories = Category.includes(:subcategories).paginate(:page => params[:page], :per_page => 10)
+    end
+
+    def manage_products
+      @products = Product.all.paginate(:page => params[:page], :per_page => 10)
     end
 
     def change_role

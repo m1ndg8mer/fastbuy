@@ -1,4 +1,10 @@
 - provide(:title, 'Edit Category')
+
+ol.breadcrumb
+  li
+    = link_to 'Categories', manage_categories_admin_users_path
+  li.active Edit
+
 h1 Edit Category
 = form_for @category do |f|
   - if @category.errors.any?

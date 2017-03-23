@@ -1,11 +1,17 @@
 - provide(:title, 'Users')
+
+ol.breadcrumb
+  li
+    = link_to 'Dashboard', dashboard_admin_users_path
+  li.active Users
+
 h1 Users
 table.table.table-bordered
   thead
     tr
       th Role
       th Email
-      th Action
+      th Actions
       th
   tbody
     - @users.each do |user|

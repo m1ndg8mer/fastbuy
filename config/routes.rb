@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     resources :users do
       collection do
         get :dashboard
+        get :manage_categories
+        get :manage_products
       end
       member do
         patch :change_role

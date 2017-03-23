@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170318195535) do
+ActiveRecord::Schema.define(version: 20170323000629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,12 +27,14 @@ ActiveRecord::Schema.define(version: 20170318195535) do
     t.string   "title"
     t.float    "price"
     t.text     "description"
-    t.integer  "review_id"
     t.integer  "category_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "img_file_name"
+    t.string   "img_content_type"
+    t.integer  "img_file_size"
+    t.datetime "img_updated_at"
     t.index ["category_id"], name: "index_products_on_category_id", using: :btree
-    t.index ["review_id"], name: "index_products_on_review_id", using: :btree
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -40,6 +42,8 @@ ActiveRecord::Schema.define(version: 20170318195535) do
     t.integer  "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.integer  "product_id"
   end
 
   create_table "roles", force: :cascade do |t|

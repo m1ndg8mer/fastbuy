@@ -6,7 +6,7 @@ class Ability
    if user.has_role? :admin
      can :manage, :all
    else
-     cannot :manage, User
+     can :read, :all
    end
   end
 

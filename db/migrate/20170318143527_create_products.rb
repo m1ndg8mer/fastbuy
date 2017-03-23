@@ -9,7 +9,6 @@ class CreateProducts < ActiveRecord::Migration[5.0]
       t.references :review
       t.references :category
       t.timestamps
-
     end
   end
 end

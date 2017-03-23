@@ -1,0 +1,45 @@
+- provide(:title, 'Categories')
+
+ol.breadcrumb
+  li
+    = link_to 'Dashboard', dashboard_admin_users_path
+  li.active Categories
+
+h1 Categories
+= link_to 'Create', new_category_path, class: 'btn btn-success'
+br
+br
+
+.center
+  = will_paginate @categories, renderer: BootstrapPagination::Rails
+br
+.table-responsive
+  table.table.table-bordered.table-hover
+    tr.active
+      th
+        h4 Category
+      th
+        h4.center Parent
+      th
+        h4.center Date
+      th colspan='2'
+        h4.center Actions
+    - @categories.each do |category|
+      tr.info
+        td
+          = link_to " #{category.title}", category_path(category), class: 'glyphicon-th-list'
+        td.center
+          - if category.parent_id
+            = get_title_by_id(category.parent_id)
+          - else
+            span.glyphicon.glyphicon-ok
+        td.center
+          = category.created_at.localtime.strftime("%d/%m/%Y at %r")
+        td.center
+          = link_to 'Edit', edit_category_path(category), class: 'btn btn-primary'
+        td.center
+          = link_to 'Delete', category, method: :delete, data: {confirm: 'You sure?'}, class: 'btn btn-danger'
+
+- if @categories.count == 0
+  h4.center Categories list is empty...
+br
