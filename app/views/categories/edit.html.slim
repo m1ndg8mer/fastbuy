@@ -15,13 +15,15 @@ h1 Edit Category
   p
     = f.label :title
     = f.text_field :title, value: @category.title, class: 'form-control'
-  p
-    = f.label :parent_id
-    br
-    = f.select(:parent_id) do
-      - @parents.each do |c|
-        - if @category.parent_id == c.id
-          - selected = 'selected'
-        = content_tag(:option, c.title, value: c.id, selected: selected)
+  - unless @category.parent_id.nil?
+    p
+      = f.label :parent_id
+      br
+      = f.select(:parent_id) do
+        - @parents.each do |c|
+          - if @category.parent_id == c.id
+            - selected = 'selected'
+          = content_tag(:option, c.title, value: c.id, selected: selected)
   = f.submit 'Update', class: 'btn btn-primary'
 br
+= console
