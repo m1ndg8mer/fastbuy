@@ -16,10 +16,11 @@ Rails.application.routes.draw do
   end
 
   resources :categories
-
   resources :products do
     resources :reviews, only: [:create, :destroy]
   end
+  resources :line_items
+  resources :carts
 
   root to: 'static_pages#home'
 

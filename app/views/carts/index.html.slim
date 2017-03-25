@@ -1,0 +1,12 @@
+ol.breadcrumb
+  li
+    = link_to 'Home', root_path
+  li.active Shopping Cart
+/! Breadcrumb Ends
+/! Main Heading Starts
+h2.main-heading.text-center
+  | Shopping Cart
+/! Main Heading Ends
+/! Shopping Cart Table Starts
+div#cart_index
+  = render 'carts/cart_index'

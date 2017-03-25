@@ -51,9 +51,7 @@
                     span.price-new
                       = "$#{product.price}"
                   .cart-button.button-group
-                    button.btn.btn-cart type="button"
-                      i.fa.fa-shopping-cart
-                      | Add to cart
+                    = button_to 'Add to cart', line_items_path(product_id: product), class: 'btn btn-cart', remote: true
           /! Product Ends
   /! Product Carousel Ends
   /! Products Row Ends

@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :initialize_categories
+  before_action :current_cart
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:terms_and_conditions])
@@ -15,14 +16,21 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound,        with: -> { render_404  }
 
   def render_404
-    respond_to do |format|
-      format.html { render template: 'errors/not_found', status: 404 }
-      format.all { render nothing: true, status: 404 }
-    end
+    redirect_to root_path, :alert => 'Not Found!'
   end
 
   def initialize_categories
     @parents_categories = Category.all.reject { |c| c.parent_id }
+    @parents_categories = @parents_categories.first(9)
+  end
+
+  def current_cart
+    @cart = Cart.find(session[:cart_id])
+  rescue ActiveRecord::RecordNotFound
+    cart = Cart.create
+    session[:cart_id] = cart.id
+    @cart = cart
+    @cart
   end
 
 end

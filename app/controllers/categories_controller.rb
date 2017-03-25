@@ -1,11 +1,7 @@
 class CategoriesController < ApplicationController
   load_and_authorize_resource
-  before_action :initialize_category, except: [:index, :new, :create]
+  before_action :initialize_category, except: [:new, :create]
   before_action :load_parent_categories
-
-  def index
-    @categories = Category.includes(:subcategories).paginate(:page => params[:page], :per_page => 10)
-  end
 
   def new
     @category = Category.new

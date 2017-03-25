@@ -78,64 +78,8 @@ header#header-area
                   i.fa.fa-search
         /! Search Ends
         /! Shopping Cart Starts
-        .col-md-3.col-xs-12
-          #cart.btn-group.btn-block
-            button.btn.btn-block.btn-lg.dropdown-toggle data-toggle="dropdown" type="button"
-              i.fa.fa-shopping-cart
-              span.hidden-md Cart:
-              span#cart-total 2 item(s) - $340.00
-              i.fa.fa-angle-down
-            ul.dropdown-menu.pull-right
-              li
-                table.table.hcart
-                  tr
-                    td.text-center
-                      a href="product.html"
-                        = image_tag 'hcart-thumb1.jpg', alt: 'image', title: 'image', style: 'img-thumbnail img-responsive'
-                    td.text-left
-                      a href="product-full.html"
-                        | Seeds
-                    td.text-right x 1
-                    td.text-right $120.68
-                    td.text-center
-                      a href="#"
-                        i.fa.fa-times
-                  tr
-                    td.text-center
-                      a href="product.html"
-                        = image_tag 'hcart-thumb2.jpg', alt: 'image', title: 'image', style: 'img-thumbnail img-responsive'
-                    td.text-left
-                      a href="product-full.html"
-                        | Organic
-                    td.text-right x 2
-                    td.text-right $240.00
-                    td.text-center
-                      a href="#"
-                        i.fa.fa-times
-              li
-                table.table.table-bordered.total
-                  tbody
-                    tr
-                      td.text-right
-                        strong Sub-Total
-                      td.text-left $1,101.00
-                    tr
-                      td.text-right
-                        strong Eco Tax (-2.00)
-                      td.text-left $4.00
-                    tr
-                      td.text-right
-                        strong VAT (17.5%)
-                      td.text-left $192.68
-                    tr
-                      td.text-right
-                        strong Total
-                      td.text-left $1,297.68
-                p.text-right.btn-block1
-                  a href="cart.html"
-                    | View Cart
-                  a href="#"
-                    | Checkout
+        .col-md-3.col-xs-12#cart
+          = render 'carts/cart'
 /! Shopping Cart Ends
 /! Main Header Ends
 /! Nested Container Ends

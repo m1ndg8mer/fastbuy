@@ -1,0 +1,85 @@
+.table-responsive.shopping-cart-table
+  table.table.table-bordered
+    thead
+      tr
+        td.text-center
+          | Image
+        td.text-center
+          | Product Details
+        td.text-center
+          | Price
+        td.text-center
+          | Total
+        td.text-center
+          | Quantity
+        td.text-center.size
+          | Action
+    tbody
+      - @cart.line_items.each do |item|
+        - product = item.product
+        tr
+          td.text-center
+            = image_tag product.img.url(:medium), class: 'img-thumbnail'
+          td.text-center
+            = link_to product.title, product_path(product)
+          td.text-center
+            = "$#{product.price}"
+          td.text-center
+            = "$#{item.total_price}"
+          = form_for item, remote: true, method: :patch do |f|
+            td.text-center
+              .input-group.btn-block
+                = f.number_field 'quantity', value: "#{item.quantity}", in: 1..20, class: 'text-center'
+            td.text-center
+              = f.button(type: 'submit', class: 'btn btn-default tool-tip') do
+                i.fa.fa-refresh
+              br
+              br
+              = link_to item, remote: true, method: :delete, class: 'btn btn-default tool-tip' do
+                i.fa.fa-times-circle
+- if @cart.line_items.length == 0
+  h2.center
+    | Empty!
+    br
+    br
+/! Shopping Cart Table Ends
+/! Shipping Section Starts
+- if @cart.line_items.length > 0
+  section.registration-area
+    .row
+      .col-sm-6
+        /! Conditions Panel Starts
+        .panel.panel-smart
+          .panel-heading
+            h3.panel-title
+              | Terms &amp; Conditions
+          .panel-body
+            p
+              | HTML Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris. Integer in mauris eu nibh euismod gravida. Duis ac tellus et risus vulputate vehicula.
+            p
+              | Donec lobortis risus a elit. Etiam tempor. Ut ullamcorper, ligula eu tempor congue, eros est euismod turpis, id tincidunt sapien risus a quam. Maecenas fermentum consequat mi. Donec fermentum. Pellentesque malesuada nulla a mi.
+            p
+              | Duis sapien sem, aliquet nec, commodo eget, consequat quis, neque. Aliquam faucibus, elit ut dictum aliquet, felis nisl adipiscing sapien, sed malesuada diam lacus eget erat. Cras mollis scelerisque nunc. Nullam arcu. Aliquam consequat.
+      /! Conditions Panel Ends
+      /! Total Panel Starts
+      .col-sm-6
+        .panel.panel-smart
+          .panel-heading
+            h3.panel-title
+              | Total
+          .panel-body
+            dl.dl-horizontal
+              dt Products Total:
+              dd
+                = @cart.line_items.length
+            hr
+            dl.dl-horizontal.total
+              dt Total :
+              dd
+                = "$#{@cart.total_price}"
+            hr
+            .text-uppercase.clearfix
+              = link_to root_path, class: 'btn btn-black pull-left' do
+                span.hidden-xs Continue Shopping
+                span.visible-xs Continue
+              = link_to 'Checkout', '', class: 'btn btn-main pull-right'

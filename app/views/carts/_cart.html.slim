@@ -1,0 +1,36 @@
+#cart.btn-group.btn-block
+  button.btn.btn-block.btn-lg.dropdown-toggle data-toggle="dropdown" type="button"
+    i.fa.fa-shopping-cart
+    span.hidden-md Cart:
+    span#cart-total
+      = "#{@cart.line_items.length} item(s) - $#{@cart.total_price}"
+    i.fa.fa-angle-down
+  ul.dropdown-menu.pull-right
+    - if @cart.line_items.length == 0
+      li
+        p.center
+          | Your shopping cart is empty!
+    - else
+      li
+        table.table.hcart
+          - @cart.line_items.each do |item|
+            tr
+              td.text-center
+                = link_to image_tag(item.product.img, alt: 'image', title: 'image', style: 'img-thumbnail img-responsive', width: 50, height: 75), product_path(item.product)
+              td.text-right
+                = "x #{item.quantity}"
+              td.text-right
+                = "$#{item.total_price}"
+              td.text-center
+                = button_to(item, method: :delete, remote: true, class: 'btn') do
+                  i.fa.fa-times
+      li
+        table.table.table-bordered.total
+          tbody
+            tr
+              td.text-right
+                strong Total
+              td.text-left
+                = "$#{@cart.total_price}"
+        p.text-right.btn-block1
+          = link_to 'View Cart', carts_path

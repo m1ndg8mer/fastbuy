@@ -1,13 +1,14 @@
 class ProductsController < ApplicationController
   load_and_authorize_resource
-  before_action :initialize_product, except: [:index, :new, :create]
+
+  before_action :set_cart
+  before_action :initialize_product, except: [:new, :create]
   before_action :initialize_categories
 
-  def index
-    @products = Product.all.paginate(:page => params[:page], :per_page => 10)
-  end
-
   def new
+    if Category.sub.length == 0
+      redirect_to manage_products_admin_users_path, :alert => 'First create subcategory!'
+    end
     @product = Product.new
   end
 
@@ -56,6 +57,15 @@ class ProductsController < ApplicationController
   def initialize_categories
     @categories = Category.sub
     @parents_categories = Category.all.reject { |c| c.parent_id }
+    @parents_categories = @parents_categories.first(9)
+  end
+
+  def set_cart
+    @cart = Cart.find(session[:cart_id])
+  rescue ActiveRecord::RecordNotFound
+    cart = Cart.create
+    session[:cart_id] = cart.id
+    @cart = cart
   end
 
 end
