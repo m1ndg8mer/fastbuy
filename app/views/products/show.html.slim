@@ -1,2 +1,164 @@
-h1 Products#show
-p Find me in app/views/products/show.html.slim
+#main-container.container
+  /! Breadcrumb Starts
+  ol.breadcrumb
+    li
+      = link_to 'Home', root_path
+    li
+      = link_to 'Category', @product.category
+    li.active Product
+  /! Breadcrumb Ends
+  /! Product Info Starts
+  .row.product-info.full
+    /! Left Starts
+    .col-sm-4.images-block
+      = image_tag @product.img, class: 'img-responsive'
+    /! Right Starts
+    .col-sm-8.product-details
+      .panel-smart
+        /! Product Name Starts
+        h2
+          = @product.title
+        - rating = get_avg_rating(@product.reviews)
+        - rating.round.times
+          span.glyphicon.glyphicon-star
+        - (5 - rating.round).times
+          span.glyphicon.glyphicon-star-empty
+        span.margin.text-success
+          = "#{rating.round(1)} (#{@product.reviews.count} Reviews)"
+        /! Product Name Ends
+        hr
+        /! Manufacturer Starts
+        ul.list-unstyled.manufacturer
+          li
+            span Availability:
+            - if @product.qty > 0
+              strong.label.label-success In Stock
+            - else
+              strong.label.label-danger Out Of Stock
+        /! Manufacturer Ends
+        hr
+        /! Price Starts
+        .price
+          span.price-head Price :
+          span.price-new
+            = "$#{@product.price}"
+        /! Price Ends
+        hr
+          .form-group
+            label.control-label.text-uppercase for="input-quantity"  Qty:
+            input#input-quantity.form-control name="quantity" size="2" type="text" value="1" /
+          .cart-button.button-group
+            button.btn.btn-cart type="button" 
+              | Add to cart
+              i.fa.fa-shopping-cart
+  /! Available Options Ends
+  /! Right Ends
+  /! Product Info Ends
+  /! Tabs Starts
+  .tabs-panel.panel-smart
+    /! Nav Tabs Starts
+    ul.nav.nav-tabs
+      li.active
+        a href="#tab-description"  Description
+      li
+        a href="#tab-specification"  Specification
+      li
+        a href="#tab-review"  Review
+    /! Nav Tabs Ends
+    /! Tab Content Starts
+    .tab-content.clearfix
+      /! Description Starts
+      #tab-description.tab-pane.active
+        = @product.description
+      /! Description Ends
+      /! Specification Starts
+      #tab-specification.tab-pane
+        table.table.table-bordered
+          thead
+            tr
+              td colspan="2" 
+                strong Name
+          tbody
+            tr
+              td Name
+              td Attribute Specification
+        table.table.table-bordered
+          thead
+            tr
+              td colspan="2" 
+                strong Name
+          tbody
+            tr
+              td Name
+              td Attribute Specification
+      /! Specification Ends
+      /! Review Starts
+      #tab-review.tab-pane
+        = form_for Review.new, url: product_reviews_path(@product), :html => {:class => 'form-horizontal'} do |f|
+          .form-group.required
+            label.col-sm-2.control-label for="review"  Review
+            .col-sm-10
+              = f.text_area :review, id: 'review', class: 'form-control', rows: 5
+              .help-block
+                | Leave a review..
+          .form-group.required
+            label.col-sm-2.control-label.ratings Ratings
+            .col-sm-10
+              | Bad&nbsp;
+              = f.radio_button(:rating, 1, checked: 'checked')
+              | &nbsp;
+              = f.radio_button(:rating, 2)
+              | &nbsp;
+              = f.radio_button(:rating, 3)
+              | &nbsp;
+              = f.radio_button(:rating, 4)
+              | &nbsp;
+              = f.radio_button(:rating, 5)
+              | &nbsp;Good
+          .buttons
+            .col-sm-offset-2.col-sm-10
+              = f.submit 'Add', class: 'btn btn-black'
+        br
+        br
+        hr
+        .center
+          = will_paginate @reviews, renderer: BootstrapPagination::Rails
+        - @reviews.each do |review|
+          .col-md-12
+            - review.rating.times
+              span.glyphicon.glyphicon-star
+            - (5-review.rating).times
+              span.glyphicon.glyphicon-star-empty
+            = " #{get_user_email_by_id(review.user_id)}"
+            span.pull-right
+              = review.created_at.localtime.strftime("%d/%m/%Y at %r")
+              - if current_user.has_role? :admin
+                = link_to ' ', product_review_path(@product, review), method: :delete,
+                        data: {confirm: 'Are you sure?'}, class: 'glyphicon glyphicon-remove'
+            pre
+              = review.review
+  /! Review Ends
+  /! Tab Content Ends
+  /! Tabs Ends
+  /! Related Products Starts
+  .product-info-box
+    h4.heading Similar Products
+    /! Products Row Starts
+    .row
+      - @similar_products.each do |product|
+        /! Product Starts
+        .col-md-3.col-sm-6
+          .product-col
+            .image
+              = image_tag product.img, class: 'img-responsive img-center-sm'
+            .caption
+              h4
+                = link_to product.title, product
+              .price
+                span.price-new
+                  = "$#{product.price}"
+              .cart-button.button-group
+                button.btn.btn-cart type="button"
+                  i.fa.fa-shopping-cart
+                  | Add to cart
+        /! Product Ends

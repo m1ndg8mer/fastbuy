@@ -12,6 +12,8 @@ class ProductsController < ApplicationController
   end
 
   def show
+    @similar_products = Product.similar(@product.category_id)
+    @reviews = @product.reviews.paginate(:page => params[:page], :per_page => 5)
   end
 
   def create
@@ -53,6 +55,7 @@ class ProductsController < ApplicationController
 
   def initialize_categories
     @categories = Category.sub
+    @parents_categories = Category.all.reject { |c| c.parent_id }
   end
 
 end

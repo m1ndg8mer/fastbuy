@@ -21,4 +21,9 @@ $(document).on 'turbolinks:load', ->
     $(this).find('.dropdown-menu').first().stop(true, true).delay(100).slideUp()
     return
 
+  $('.nav-tabs a').click (e) ->
+    e.preventDefault()
+    $(this).tab 'show'
+    return
+
   return

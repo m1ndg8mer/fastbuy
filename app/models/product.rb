@@ -1,8 +1,11 @@
 class Product < ApplicationRecord
   resourcify
   validates :title, :qty, :price, :description, presence: true
-  validates :qty, presence: true, numericality: { only_integer: true, greater_than: 0 }
+  validates :qty, presence: true, numericality: { only_integer: true, greater_than: -1 }
   validates :price, format: { with: /\A\d+(?:\.\d{2})?\z/ }, numericality: { greater_than: 0.00 }
+
+  default_scope { order(id: :desc) }
+  scope :similar, -> (cat_id) { where(category_id: cat_id).limit(4) }
 
   has_attached_file :img, styles: { medium: "200x200>", thumb: "100x100>" },
                     default_url: ":style/missing.png"

@@ -16,7 +16,10 @@ Rails.application.routes.draw do
   end
 
   resources :categories
-  resources :products
+
+  resources :products do
+    resources :reviews, only: [:create, :destroy]
+  end
 
   root to: 'static_pages#home'
 
