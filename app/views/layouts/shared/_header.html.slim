@@ -13,51 +13,56 @@ header#header-area
                 = link_to root_path do
                   i.fa.fa-home.hidden-lg.hidden-md title="Home"
                   span.hidden-sm.hidden-xs
-                    | Home
+                    = t 'nav.home'
               - unless user_signed_in?
                 li
                   = link_to new_user_session_path do
                     i.fa.fa-lock.hidden-lg.hidden-md title="Login"
                     span.hidden-sm.hidden-xs
-                      | Login
+                      = t 'nav.login'
                 li
                   = link_to new_user_registration_path do
                     i.fa.fa-unlock.hidden-lg.hidden-md title="Register"
                     span.hidden-sm.hidden-xs
-                      | Register
+                      = t 'nav.register'
               - else
                 li
                   = link_to edit_user_registration_path do
                     i.fa.fa-user.hidden-lg.hidden-md title=("My Account")
                     span.hidden-sm.hidden-xs
-                      | My Account
+                      = t 'nav.account'
                 li
                   = link_to destroy_user_session_path, method: :delete do
                     i.fa.fa-lock.hidden-lg.hidden-md title="Logout"
                     span.hidden-sm.hidden-xs
-                      | Logout
+                      = t 'nav.logout'
                 - if current_user.has_role? :admin
                   li
                     = link_to dashboard_admin_users_path do
                       i.fa.fa-lock.hidden-lg.hidden-md title="Admin Panel"
                       span.hidden-sm.hidden-xs
-                        | Admin Panel
+                        = t 'nav.admin'
         /! Header Links Ends
         .col-sm-3.col-xs-12.hidden-md.hidden-sm.hidden-xs.text-center.msg
-          span Welcome to our online store!
+          span
+            = t 'nav.greeting'
         /! Currency &amp; Languages Starts
         .col-lg-4.col-sm-7.col-xs-12.text-right
           /! Languages Starts
           .btn-group
             button.btn.btn-link.dropdown-toggle.text-uppercase data-toggle="dropdown"
-              | Language:
-              span English
+              = t 'nav.language'
+              span
+                - if I18n.locale == :en
+                  = 'English'
+                - else
+                  = 'Українська'
               i.fa.fa-caret-down
             ul.pull-right.dropdown-menu
               li
-                a href="#" tabindex="-1"  English
+                = link_to 'English', locale: 'en'
               li
-                a href="#" tabindex="-1"  Ukrainian
+                = link_to 'Ukrainian', locale: 'uk'
     /! Languages Ends
     /! Main Header Starts
     .main-header

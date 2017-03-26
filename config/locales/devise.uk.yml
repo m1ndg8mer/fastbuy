@@ -1,0 +1,11 @@
+# Additional translations at https://github.com/plataformatec/devise/wiki/I18n
+
+uk:
+  devise:
+    failure:
+      deleted_account: "Ваш профіль було видалено!"
+    registrations:
+      signed_up: "Вітаємо! Ви успішно зареєструвалися"
+    sessions:
+      signed_in: "Ви успішно увійшли."
+      signed_out: "Ви успішно вийшли."
