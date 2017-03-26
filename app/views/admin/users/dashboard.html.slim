@@ -17,4 +17,8 @@
     = render 'layouts/shared/panel',  title: panel_title(@total_products, 'Products'),
             link_to_index: manage_products_admin_users_path,
             glyphicon: 'glyphicon-apple'
+
+    = render 'layouts/shared/panel', title: panel_title(@total_orders, 'Orders'),
+            link_to_index: manage_orders_admin_users_path,
+            glyphicon: 'glyphicon glyphicon-cloud'
 br

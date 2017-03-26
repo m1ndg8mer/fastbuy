@@ -1,0 +1,35 @@
+ol.breadcrumb
+  li
+    = link_to 'My Orders', orders_path
+  li.active
+    | Order
+
+.table-responsive.shopping-cart-table
+  table.table.table-bordered
+    thead
+      tr
+        td.text-center
+          | Image
+        td.text-center
+          | Product Details
+        td.text-center
+          | Price
+        td.text-center
+          | Total
+        td.text-center
+          | Quantity
+    tbody
+      - @order.cart.line_items.each do |item|
+        - product = item.product
+        tr
+          td.text-center
+            = image_tag product.img.url(:medium), class: 'img-thumbnail'
+          td.text-center
+            = link_to product.title, product_path(product)
+          td.text-center
+            = "$#{product.price}"
+          td.text-center
+            = "$#{item.total_price}"
+          td.text-center
+            = item.quantity
+br

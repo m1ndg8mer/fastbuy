@@ -1,0 +1,34 @@
+ol.breadcrumb
+  li
+    = link_to 'Profile', edit_user_registration_path
+  li.active
+    | My Orders
+.nu
+  table.ck border='1'
+    thead
+      tr
+        th Order
+        th Date
+        th Total
+        th Admin Email
+        th Status
+    tbody
+      - @orders.each do |order|
+        tr
+          td
+            = link_to "##{order.id}", order
+          td
+            = order.created_at.localtime.strftime("%d/%m/%Y at %r")
+          td
+            = number_to_currency order.cart.total_price
+          td
+            | admin@gmail.com
+          td
+            = order.status
+br
+.center
+  = will_paginate @orders, renderer: BootstrapPagination::Rails
+- if @orders.count == 0
+  h4.center Orders list is empty...
+br
+br

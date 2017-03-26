@@ -1,0 +1,46 @@
+ol.breadcrumb
+  li
+    = link_to 'Profile', edit_user_registration_path
+  li.active
+    | My Orders
+.nu
+  table.ck border='1'
+    thead
+      tr
+        th Order
+        th Full Name
+        th Email
+        th Number
+        th Total
+        th Date
+        th Change Status
+        th Status
+    tbody
+      - @orders.each do |order|
+        tr
+          td
+            = link_to "##{order.id}", order
+          td
+            = "#{order.user.first_name} #{order.user.last_name}"
+          td
+            = order.user.email
+          td
+            = order.user.phone_number
+          td
+            = number_to_currency order.cart.total_price
+          td
+            = order.created_at.localtime.strftime("%d/%m/%Y at %r")
+          td
+            = link_to "waiting_paid", change_status_path(order, 0) , method: :patch, class: "btn"
+            = link_to "paid", change_status_path(order, 1) , method: :patch, class: "btn"
+            = link_to "was_send", change_status_path(order, 2) , method: :patch, class: "btn"
+            = link_to "close", change_status_path(order, 3) , method: :patch, class: "btn"
+          td
+            = order.status
+br
+.center
+  = will_paginate @orders, renderer: BootstrapPagination::Rails
+- if @orders.count == 0
+  h4.center Orders list is empty...
+br
+br

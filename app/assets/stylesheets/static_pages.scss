@@ -9,6 +9,34 @@
 
 /* clearfix */
 
+.nu {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -ms-overflow-style: -ms-autohiding-scrollbar; }
+.nu.cl {
+  border: 1px;
+}
+
+ck .bqd {
+  padding-right: 20px;
+  font-weight: 300;
+}
+.ck .bqd:hover {
+  cursor: pointer;
+}
+
+tr, th, td {
+  padding: 5px;
+}
+
+th, td {
+  text-align: center;
+}
+
+table {
+  margin: 0 auto;
+}
 
 th {
   width: 200px;

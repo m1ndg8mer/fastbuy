@@ -14,6 +14,10 @@ module Admin
       @products = Product.paginate(:page => params[:page], :per_page => 5)
     end
 
+    def manage_orders
+      @orders = Order.paginate(:page => params[:page], :per_page => 10)
+    end
+
     def change_role
       @user = User.find(params[:id])
 
@@ -43,6 +47,7 @@ module Admin
       @total_categories = Category.includes(:subcategories).count
       @total_products = Product.count
       @total_users = User.count
+      @total_orders = Order.count
     end
 
     private

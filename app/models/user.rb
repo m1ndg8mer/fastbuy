@@ -11,6 +11,7 @@ class User < ApplicationRecord
 
   validates :terms_and_conditions, acceptance: true
   has_many :reviews
+  has_many :orders
 
   def assign_role
     self.add_role(:user) if self.roles.blank?
