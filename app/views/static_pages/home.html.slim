@@ -61,68 +61,25 @@
     = image_tag '1col-banner1.jpg', alt: 'banners', style: 'img-responsive img-center-sm img-center-xs'
   /! 1 Column Banners Ends
   /! Featured Products Starts
+  h2.product-head Products
   section.products-list
     /! Heading Starts
-    h2.product-head Popular Products
-    /! Heading Ends
-    /! Products Row Starts
-    .row
-      /! Product #1 Starts
-      .col-md-4.col-sm-6
-        .product-col
-          .image
-            = image_tag '9.jpg', alt: 'product', style: 'img-responsive img-center-sm img-center-xs'
-          .caption
-            h4
-              a href="product-full.html"  Digital Electro Goods
-            .price
-              span.price-new $199.50
-              span.price-old $249.50
-            .cart-button.button-group
-              button.btn.btn-cart type="button"
-                i.fa.fa-shopping-cart
-                | Add to cart
-              button.btn.btn-wishlist title="Wishlist" type="button"
-                i.fa.fa-heart
-              button.btn.btn-compare title="Compare" type="button"
-                i.fa.fa-bar-chart-o
-      /! Product #1 Ends
-      /! Product #2 Starts
-      .col-md-4.col-sm-6
-        .product-col
-          .image
-            = image_tag '10.jpg', alt: 'product', style: 'img-responsive img-center-sm img-center-xs'
-          .caption
-            h4
-              a href="product-full.html"  Digital Electro Goods
-            .price
-              span.price-new $199.50
-              span.price-old $249.50
-            .cart-button.button-group
-              button.btn.btn-cart type="button"
-                i.fa.fa-shopping-cart
-                | Add to cart
-              button.btn.btn-wishlist title="Wishlist" type="button"
-                i.fa.fa-heart
-              button.btn.btn-compare title="Compare" type="button"
-                i.fa.fa-bar-chart-o
-      /! Product #2 Ends
-      /! Product #3 Starts
-      .col-md-4.col-sm-6
-        .product-col
-          .image
-            = image_tag '11.jpg', alt: 'product', style: 'img-responsive img-center-sm img-center-xs'
-          .caption
-            h4
-              a href="product-full.html"  Digital Electro Goods
-            .price
-              span.price-new $199.50
-              span.price-old $249.50
-            .cart-button.button-group
-              button.btn.btn-cart type="button"
-                i.fa.fa-shopping-cart
-                | Add to cart
-              button.btn.btn-wishlist title="Wishlist" type="button"
-                i.fa.fa-heart
-              button.btn.btn-compare title="Compare" type="button"
-                i.fa.fa-bar-chart-o
+    .col-md-12
+      /! Product Grid Display Starts
+      .row
+        /! Product #1 Starts
+        - @products.each do |product|
+          .col-md-4.col-sm-6
+            .product-col
+              .image
+                = image_tag product.img(:medium), class: 'mg-responsive img-center-sm'
+              .caption
+                h4
+                  = link_to product.title, product
+                .price
+                  span.price-new
+                    = number_to_currency product.price
+                .cart-button.button-group
+                  = button_to line_items_path(product_id: product), class: 'btn btn-cart', remote: true do
+                    i.fa.fa-shopping-cart
+                    | Add to cart

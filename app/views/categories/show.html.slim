@@ -1,1 +1,26 @@
-
+.col-md-12
+  /! Breadcrumb Starts
+  ol.breadcrumb
+    li
+      = link_to 'Home', root_path
+    li.active Category
+  /! Breadcrumb Ends
+  /! Product Grid Display Starts
+  .row
+    /! Product #1 Starts
+    - @products.each do |product|
+      .col-md-4.col-sm-6
+        .product-col
+          .image
+            = image_tag product.img(:medium), class: 'mg-responsive img-center-sm'
+          .caption
+            h4
+              = link_to product.title, product
+            .price
+              span.price-new
+                = number_to_currency product.price
+            .cart-button.button-group
+              = button_to line_items_path(product_id: product), class: 'btn btn-cart', remote: true do
+                i.fa.fa-shopping-cart
+                | Add to cart
+      /! Product #1 Ends
